@@ -1,0 +1,34 @@
+# Sistema de Controle de Semáforo Inteligente com Botão de Pedestre
+sistema SemaforoInteligente
+
+estado VERDE
+estado AMARELO
+estado VERMELHO
+estado PEDESTRE
+
+VERDE -> AMARELO quando tempo >= 30 ou botao pressionado
+AMARELO -> VERMELHO quando tempo >= 5
+VERMELHO -> PEDESTRE quando tempo >= 2
+PEDESTRE -> VERDE quando tempo >= 15
+
+estado VERDE:
+    led verde ligar
+    led amarelo desligar
+    led vermelho desligar
+    buzzer desligar
+
+estado AMARELO:
+    led verde desligar
+    led amarelo ligar
+    led vermelho desligar
+
+estado VERMELHO:
+    led verde desligar
+    led amarelo desligar
+    led vermelho ligar
+
+estado PEDESTRE:
+    led verde desligar
+    led amarelo desligar
+    led vermelho ligar
+    buzzer bipar

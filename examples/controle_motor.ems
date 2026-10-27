@@ -1,0 +1,22 @@
+# Exemplo oficial do artigo acadêmico EmState:
+# "EmState: Uma Linguagem Específica de Domínio para a Descrição de Máquinas de Estados em Sistemas Embarcados"
+# Autores: Matheus Della Rosa (RA: 113209), Guilherme Marolla Tesch (RA: 113800)
+
+sistema ControleMotor
+
+estado PARADO
+estado FUNCIONANDO
+estado ERRO
+
+PARADO -> FUNCIONANDO quando botao pressionado
+FUNCIONANDO -> PARADO quando botao pressionado
+FUNCIONANDO -> ERRO quando corrente > 2
+
+estado PARADO:
+    motor parar
+
+estado FUNCIONANDO:
+    motor velocidade 70
+
+estado ERRO:
+    motor parar

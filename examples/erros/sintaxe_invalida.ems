@@ -1,0 +1,7 @@
+# Teste de Erro Sintático: Transição malformada (falta operador '->')
+sistema TesteErroSintaxe
+
+estado A
+estado B
+
+A para B quando botao pressionado

@@ -1,0 +1,23 @@
+# Controle de Temperatura e Umidade de Estufa
+sistema EstufaInteligente
+
+estado NORMAL
+estado RESFRIANDO
+estado AQUECENDO
+
+NORMAL -> RESFRIANDO quando temperatura > 30.0
+NORMAL -> AQUECENDO quando temperatura < 18.0
+RESFRIANDO -> NORMAL quando temperatura <= 25.0
+AQUECENDO -> NORMAL quando temperatura >= 22.0
+
+estado NORMAL:
+    motor parar
+    led ligar
+
+estado RESFRIANDO:
+    motor velocidade 90
+    led ligar
+
+estado AQUECENDO:
+    motor parar
+    led piscar 500

@@ -1,0 +1,57 @@
+(* ========================================================================== *)
+(* Gramática Formal da Linguagem EmState (EBNF)                               *)
+(* Sistema de Descrição de Máquinas de Estados para Sistemas Embarcados      *)
+(* Autores: Matheus Della Rosa (RA: 113209), Guilherme Marolla Tesch (113800) *)
+(* ========================================================================== *)
+
+ProgramaEmState = CabecalhoSistema , { ElementoPrograma } ;
+
+CabecalhoSistema = "sistema" , Identificador , NovaLinha ;
+
+ElementoPrograma = DeclaracaoEstado
+                 | Transicao
+                 | BlocoAcoes ;
+
+(* Declaração Simples de Estado *)
+DeclaracaoEstado = "estado" , Identificador , NovaLinha ;
+
+(* Declaração de Transição *)
+Transicao = Identificador , "->" , Identificador , [ "quando" , Condicao ] , NovaLinha ;
+
+(* Condições *)
+Condicao = ExpressaoOu ;
+
+ExpressaoOu = ExpressaoE , { "ou" , ExpressaoE } ;
+
+ExpressaoE = CondicaoPrimaria , { "e" , CondicaoPrimaria } ;
+
+CondicaoPrimaria = CondicaoRelacional
+                 | CondicaoDispositivo
+                 | "(" , Condicao , ")" ;
+
+CondicaoRelacional = Identificador , OperadorRelacional , Valor ;
+
+OperadorRelacional = "==" | "!=" | ">" | ">=" | "<" | "<=" ;
+
+CondicaoDispositivo = Identificador , [ Identificador ] ;
+                      (* Ex: botao pressionado, sensor ativo, ligado *)
+
+(* Bloco de Ações de um Estado *)
+BlocoAcoes = "estado" , Identificador , ":" , NovaLinha , Indentacao , { Acao , NovaLinha } , Desindentacao ;
+
+Acao = Identificador , Identificador , { Argumento } ;
+       (* Ex: motor parar, motor velocidade 70, buzzer tocar 1000, led ligar *)
+
+Argumento = Numero | Texto | Identificador ;
+
+Valor = Numero | Texto | Identificador ;
+
+(* Elementos Léxicos *)
+Identificador = Letra , { Letra | Digito | "_" } ;
+Numero        = [ "-" ] , Digito , { Digito } , [ "." , Digito , { Digito } ] ;
+Texto         = '"' , { Caractere } , '"' | "'" , { Caractere } , "'" ;
+Letra         = "a" ... "z" | "A" ... "Z" ;
+Digito        = "0" ... "9" ;
+NovaLinha     = "\n" | "\r\n" ;
+Indentacao    = (* aumento de espaços no início da linha *) ;
+Desindentacao = (* retorno ao nível anterior de indentação *) ;

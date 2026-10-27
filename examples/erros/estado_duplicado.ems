@@ -1,0 +1,8 @@
+# Teste de Erro Semântico: O estado 'LIGADO' foi declarado duas vezes
+sistema TesteErroEstadoDuplicado
+
+estado DESLIGADO
+estado LIGADO
+estado LIGADO
+
+DESLIGADO -> LIGADO quando botao pressionado

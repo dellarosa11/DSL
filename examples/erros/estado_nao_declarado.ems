@@ -1,0 +1,7 @@
+# Teste de Erro Semântico: Estado de destino 'MANUTENCAO' não foi declarado
+sistema TesteErroEstadoNaoDeclarado
+
+estado INICIAL
+estado PRONTO
+
+INICIAL -> MANUTENCAO quando sensor ativo

@@ -1,0 +1,23 @@
+# Sistema de Alarme Residencial com Sensor de Presença e Alerta Sonoro
+sistema AlarmeResidencial
+
+estado DESARMADO
+estado ARMADO
+estado DISPARADO
+
+DESARMADO -> ARMADO quando chave ativada
+ARMADO -> DESARMADO quando chave desativada
+ARMADO -> DISPARADO quando presenca detectada
+DISPARADO -> DESARMADO quando chave desativada
+
+estado DESARMADO:
+    led desligar
+    buzzer desligar
+
+estado ARMADO:
+    led ligar
+    buzzer desligar
+
+estado DISPARADO:
+    led piscar 200
+    buzzer tocar 2500

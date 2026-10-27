@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emstate"
+version = "1.0.0"
+authors = [
+  { name="Matheus Della Rosa", email="matheus.dellarosa@exemplo.com" },
+  { name="Guilherme Marolla Tesch", email="guilherme.tesch@exemplo.com" },
+]
+description = "EmState: Uma Linguagem Específica de Domínio para a Descrição de Máquinas de Estados em Sistemas Embarcados"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Compilers",
+    "Topic :: Software Development :: Embedded Systems",
+]
+
+[project.scripts]
+emstate = "emstate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

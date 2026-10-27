@@ -1,0 +1,10 @@
+# Teste de Erro Semântico: Valor de velocidade fora do intervalo válido (0 a 100)
+sistema TesteErroValorInvalido
+
+estado PARADO
+estado ACELERADO
+
+PARADO -> ACELERADO quando botao pressionado
+
+estado ACELERADO:
+    motor velocidade 250
