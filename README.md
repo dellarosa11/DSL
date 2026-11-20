@@ -6,6 +6,12 @@
 
 ---
 
+## Abrir a interface gráfica
+
+No Windows, dê dois cliques em **Abrir EmState.pyw**. Pelo terminal, execute `python emstate.py gui` com Python e Tkinter instalados.
+
+O semáforo já aparece carregado. Selecione **pressionado** no campo **botao** e clique em **Avançar um ciclo** para ver a mudança de VERDE para AMARELO. Ao editar o código, clique em **Verificar programa** para iniciar uma nova simulação.
+
 ## 📖 Visão Geral
 
 A **EmState** é uma Linguagem Específica de Domínio (DSL) projetada para simplificar a modelagem, validação e implementação de máquinas de estados finitos (FSM) em sistemas embarcados. 

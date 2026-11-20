@@ -160,6 +160,7 @@ def main():
         description="Compilador e Ferramentas para a DSL EmState (Máquinas de Estados para Sistemas Embarcados)"
     )
     subparsers = parser.add_subparsers(dest="command", help="Comandos disponíveis")
+    subparsers.add_parser("gui", help="Abre o editor e o simulador em uma janela")
 
     # Subcomando 'check'
     p_check = subparsers.add_parser("check", help="Executa análises léxica, sintática e semântica")
@@ -192,6 +193,10 @@ def main():
     p_diag.set_defaults(func=cmd_diagram)
 
     args = parser.parse_args()
+    if args.command == "gui":
+        from .gui import main as abrir_interface
+        abrir_interface()
+        return
 
     if not args.command:
         parser.print_help()
