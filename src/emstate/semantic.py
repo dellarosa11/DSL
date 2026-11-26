@@ -72,19 +72,22 @@ class SemanticAnalyzer:
     }
 
     @staticmethod
+    def _argumento_numerico(args: List, nome_param: str, line: int, col: int):
+        if len(args) != 1 or not isinstance(args[0], (int, float)):
+            raise SemanticError(f"{nome_param} exige exatamente um argumento numérico", line, col)
+        return args[0]
+
+    @staticmethod
     def _validar_velocidade_motor(args: List, line: int, col: int):
-        if not args:
-            raise SemanticError("Comando 'motor velocidade' exige um valor de velocidade", line, col)
-        val = args[0]
-        if isinstance(val, (int, float)):
-            if val < 0 or val > 100:
-                raise SemanticError(f"Velocidade do motor deve estar entre 0 e 100%. Recebido: {val}", line, col)
+        val = SemanticAnalyzer._argumento_numerico(args, "Comando 'motor velocidade'", line, col)
+        if not 0 <= val <= 100:
+            raise SemanticError(f"Velocidade do motor deve estar entre 0 e 100%. Recebido: {val}", line, col)
 
     @staticmethod
     def _validar_positivo(args: List, nome_param: str, line: int, col: int):
-        if args and isinstance(args[0], (int, float)):
-            if args[0] <= 0:
-                raise SemanticError(f"Valor de {nome_param} deve ser maior que zero. Recebido: {args[0]}", line, col)
+        val = SemanticAnalyzer._argumento_numerico(args, nome_param, line, col)
+        if val <= 0:
+            raise SemanticError(f"Valor de {nome_param} deve ser maior que zero. Recebido: {val}", line, col)
 
     def __init__(self):
         self.symbol_table = SymbolTable()

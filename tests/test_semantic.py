@@ -75,6 +75,27 @@ class TestSemantic(unittest.TestCase):
             self._analisar(codigo)
         self.assertIn("Velocidade do motor deve estar entre 0 e 100%", str(ctx.exception))
 
+    def test_comandos_numericos_exigem_um_numero(self):
+        for comando in ("motor velocidade", "led piscar", "buzzer tocar"):
+            for argumento in ('"alta"', "alta", "", "10 20"):
+                with self.subTest(comando=comando, argumento=argumento):
+                    codigo = f"sistema Teste\nestado A\nestado A:\n    {comando} {argumento}\n"
+                    with self.assertRaisesRegex(SemanticError, "um argumento numérico"):
+                        self._analisar(codigo)
+
+    def test_argumentos_numericos_validos(self):
+        self._analisar(
+            "sistema Teste\nestado A\nestado A:\n"
+            "    motor velocidade 0\n    motor velocidade 100\n"
+            "    motor velocidade 12.5\n    led piscar 100\n    buzzer tocar 440\n"
+        )
+
+    def test_comandos_com_parametro_positivo_rejeitam_zero(self):
+        for comando in ("led piscar", "buzzer tocar"):
+            with self.subTest(comando=comando):
+                with self.assertRaisesRegex(SemanticError, "maior que zero"):
+                    self._analisar(f"sistema Teste\nestado A\nestado A:\n    {comando} 0\n")
+
 
 if __name__ == "__main__":
     unittest.main()
